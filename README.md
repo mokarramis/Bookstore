@@ -71,7 +71,6 @@ When one module needs functionality from another module, the communication shoul
 
 For example:
 
-```text
 Backoffice
     |
     | CategoryInterface
