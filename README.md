@@ -147,6 +147,7 @@ The project currently follows a Modular Monolith approach.
 
 The architecture is intentionally designed with future microservice extraction in mind. If the project grows and business requirements justify it, individual domains can potentially be extracted into independent services.
 
+```text
                     Modular Monolith
                            |
         +------------------+------------------+
@@ -157,3 +158,4 @@ The architecture is intentionally designed with future microservice extraction i
         +------------------+------------------+
                            |
                     Shared Contracts
+```
