@@ -13,9 +13,7 @@ class CategoryController extends Controller
 {
 
     public function __construct(public CategoryInterface $categoryInterface)
-    {
-      
-    }
+    {}
 
     #[OA\Post(
       path: '/category',
