@@ -10,6 +10,11 @@ class Book extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('category', 'book_categories');
+        return $this->belongsToMany(Category::class, 'book_categories');
+    }
+
+    public function bookItems()
+    {
+        return $this->hasMany(BookItem::class);
     }
 }

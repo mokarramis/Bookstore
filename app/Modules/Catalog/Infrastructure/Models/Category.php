@@ -20,4 +20,14 @@ class Category extends Model
     {
         return $this->children()->with('childrenRecursive');
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_categories');
+    }
+
+    public function contents()
+    {
+        return $this->belongsToMany(Content::class, 'content_categories');
+    }
 }

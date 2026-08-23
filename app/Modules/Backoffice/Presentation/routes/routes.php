@@ -15,7 +15,3 @@ Route::prefix('book')->group(function () {
     Route::post('/', [BookController::class, 'create']);
     Route::get('/', [BookController::class, 'list']);
 });
-
-// Route::prefix('author')->group(function () {
-//   Route::post('create', [AuthorController::class, 'create']);
-// });

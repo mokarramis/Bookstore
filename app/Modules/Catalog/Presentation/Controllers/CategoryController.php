@@ -2,18 +2,19 @@
 
 namespace App\Modules\Catalog\Presentation\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Modules\Catalog\Infrastructure\Models\Content;
-use App\Modules\Catalog\Presentation\Resource\Category\CategoryResource as CategoryCategoryResource;
+use App\Modules\Catalog\Presentation\Resource\Category\CategoryResource;
 use App\Modules\Catalog\Presentation\Resource\Category\ContentCategoryResource;
 
 
-class CategoryController
+class CategoryController extends Controller
 {
     public function index()
     {
         $contentWithCategories = Content::with(['categories.childrenRecursive'])->get();
         
-        return success('Category data', CategoryCategoryResource::collection($contentWithCategories), 200);
+        return success('Category data', CategoryResource::collection($contentWithCategories), 200);
     }
 
     public function showContentCategory(Content $content)

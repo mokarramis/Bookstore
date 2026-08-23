@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('file_size')->nullable();
             $table->foreignId('publisher_id')->constrained();
             $table->foreignId('book_id')->constrained();
+            $table->foreignId('content_id')->constrained();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Modules\Catalog\Application\DTO\CategoryDTO;
 use App\Modules\Catalog\Application\DTO\ContentDTO;
 use App\Modules\Catalog\Infrastructure\Models\Category;
 use App\Modules\Catalog\Infrastructure\Models\Content;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService implements CategoryInterface
@@ -29,7 +30,7 @@ class CategoryService implements CategoryInterface
         return CategoryDTO::fromModel($category);
     }
 
-    public function list(): Category
+    public function list(): Collection
     {
         $category = Category::get();
 
