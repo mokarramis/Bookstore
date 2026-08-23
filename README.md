@@ -71,6 +71,7 @@ When one module needs functionality from another module, the communication shoul
 
 For example:
 
+```text
 Backoffice
     |
     | CategoryInterface
@@ -80,6 +81,7 @@ Catalog
     ↓
 CategoryService
 
+```
 ---
 
 ## Domain Boundaries
@@ -107,7 +109,7 @@ Authentication is implemented as a separate module.
 
 Other modules should not directly depend on the internal implementation of the Authentication module.
 
-For example, authenticated user information can be accessed through Laravel's authentication layer:
+For example, authenticated user information can be accessed through Laravel's authentication layer
 
 ---
 
