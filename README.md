@@ -1,59 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Online Bookstore & Digital Library
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+An online bookstore and digital library platform inspired by services such as Fidibo.
 
-## About Laravel
+This project is being developed as a modular, scalable, and maintainable backend application. The main goal is not only to implement the required features, but also to maintain a clean architecture and clear boundaries between different business domains.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> **Status:** Work in Progress
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## About the Project
 
-## Learning Laravel
+This project is an online bookstore and digital content platform where users can browse, search, and purchase different types of books and digital content.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+The platform is inspired by applications such as Fidibo and is designed to support different types of book content, including:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- E-books
+- Audiobooks
+- Textbooks
+- Magazines
+- Podcasts
+- Other digital content
 
-## Laravel Sponsors
+The project is currently under active development and new features are being added continuously.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Architecture
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+One of the main goals of this project is to keep the application as modular as possible.
 
-## Contributing
+The application is divided into separate modules based on business domains. Each module is responsible for its own business logic and should have minimal knowledge about the internal implementation of other modules.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+For example:
 
-## Code of Conduct
+- Authentication
+- Catalog
+- Backoffice
+- Orders
+- Payments
+- Users
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The exact module structure may evolve as the project grows.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Modular Design
 
-## License
+The project follows a modular architecture rather than putting all business logic into a single application layer.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Each module is designed to contain its own:
+
+- Domain logic
+- Contracts / Interfaces
+- Services
+- Models
+- Requests
+- Resources
+- Controllers
+- Infrastructure-related implementations
+
+The goal is to keep modules loosely coupled and make them easier to maintain, test, and eventually extract into independent services if needed.
+
+---
+
+## Communication Between Modules
+
+A major design principle of this project is avoiding direct coupling between domains.
+
+When one module needs functionality from another module, the communication should preferably happen through a contract/interface rather than directly depending on the implementation.
+
+For example:
+
+```text
+Backoffice
+    |
+    | CategoryInterface
+    ↓
+Catalog
+    |
+    ↓
+CategoryService
+
+---
+
+## Domain Boundaries
+
+Each business domain is treated as an independent responsibility.
+
+For example, the Catalog domain is responsible for concepts such as:
+
+- Books
+- Book editions/items
+- Categories
+- Authors
+- Publishers
+- Content formats
+
+The Backoffice module is responsible for administrative operations and does not own the Catalog domain itself.
+Instead, Backoffice communicates with Catalog through defined contracts.
+This separation makes it possible to change the way a domain is implemented without forcing other modules to depend on its internal details
+
+---
+
+## Authentication
+
+Authentication is implemented as a separate module.
+
+Other modules should not directly depend on the internal implementation of the Authentication module.
+
+For example, authenticated user information can be accessed through Laravel's authentication layer:
+
+---
+
+## Technology Stack
+
+The project is primarily built with:
+
+PHP
+Laravel
+MySQL
+Redis
+Docker
+OpenAPI / Swagger
+
+Additional technologies and services may be introduced as the project evolves.
+
+---
+
+## Project Goals
+
+The main goals of this project are:
+
+Build a real-world online bookstore platform
+Practice modular architecture
+Maintain clear domain boundaries
+Reduce coupling between modules
+Use interfaces and dependency injection for communication
+Apply clean and maintainable coding practices
+Build a scalable foundation for future development
+Keep the architecture flexible enough for future microservice migration
+
+---
+
+## Future Direction
+
+The project currently follows a Modular Monolith approach.
+
+The architecture is intentionally designed with future microservice extraction in mind. If the project grows and business requirements justify it, individual domains can potentially be extracted into independent services.
+
+                    Modular Monolith
+                           |
+        +------------------+------------------+
+        |                  |                  |
+        v                  v                  v
+ Authentication         Catalog          Backoffice
+        |                  |                  |
+        +------------------+------------------+
+                           |
+                    Shared Contracts
