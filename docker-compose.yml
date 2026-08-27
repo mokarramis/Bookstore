@@ -55,6 +55,19 @@ services:
       - db
     networks:
       - laravel
+  
+  horizon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan horizon
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - redis
+      - db
+    networks:
+      - laravel
 
 
   redis:

@@ -25,6 +25,9 @@ RUN apt-get update && apt-get install -y \
         gd \
         intl \
         zip \
+    && pecl channel-update pecl.php.net \
+    && pecl install redis-6.1.0 \
+    && docker-php-ext-enable redis \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
