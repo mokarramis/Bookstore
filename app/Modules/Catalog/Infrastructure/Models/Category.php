@@ -2,10 +2,19 @@
 
 namespace App\Modules\Catalog\Infrastructure\Models;
 
+use App\Modules\Catalog\Infrastructure\Database\Factories\CategoryFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory()
+    {
+        return CategoryFactory::new();
+    }
+
     public function parent()
     {
         $this->belongsTo(Category::class, 'parent_id');

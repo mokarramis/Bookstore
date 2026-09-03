@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreignId('book_id')->constrained();
             $table->foreignId('content_id')->constrained();
             $table->timestamps();
+
+            $table->index('book_id');
         });
     }
 

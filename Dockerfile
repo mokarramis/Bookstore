@@ -2,17 +2,20 @@ FROM php:8.4-fpm
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    unzip \
-    libzip-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
-    libicu-dev \
+COPY redis-6.1.0.tgz /tmp/redis.tgz
+COPY xdebug-3.5.3.tgz /tmp/xdebug.tgz
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git \
+        curl \
+        unzip \
+        libzip-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+        libonig-dev \
+        libxml2-dev \
+        libicu-dev \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
@@ -25,9 +28,12 @@ RUN apt-get update && apt-get install -y \
         gd \
         intl \
         zip \
-    && pecl channel-update pecl.php.net \
-    && pecl install redis-6.1.0 \
+    && pecl install /tmp/redis.tgz \
     && docker-php-ext-enable redis \
+    && pecl install /tmp/xdebug.tgz \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode=coverage" > /usr/local/etc/php/conf.d/99-xdebug.ini \
+    && rm -f /tmp/redis.tgz /tmp/xdebug.tgz \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

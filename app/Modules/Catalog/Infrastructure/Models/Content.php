@@ -2,10 +2,18 @@
 
 namespace App\Modules\Catalog\Infrastructure\Models;
 
+use App\Modules\Catalog\Infrastructure\Database\Factories\ContentFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model
 {
+    use HasFactory;
+    protected static function newFactory()
+    {
+        return ContentFactory::new();
+    }
+
     protected $guarded = ['id'];
 
     public function categories()

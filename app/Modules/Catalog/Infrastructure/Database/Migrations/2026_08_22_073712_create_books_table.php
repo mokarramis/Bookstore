@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->text('summary');
             $table->timestamps();
+
+            $table->index('title');
         });
     }
 

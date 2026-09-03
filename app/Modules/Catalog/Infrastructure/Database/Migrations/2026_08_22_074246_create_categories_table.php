@@ -16,8 +16,10 @@ return new class extends Migration
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('title', 100);
             $table->string('slug')->nullable();
-            $table->string('status');
+            $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->index('title');
         });
     }
 
