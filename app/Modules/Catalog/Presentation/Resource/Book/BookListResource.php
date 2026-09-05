@@ -15,16 +15,16 @@ class BookListResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->book->id,
+            'book_id' => $this->book->id,
             'book_item_id' => $this->id,
             'title' => $this->book->title,
-            'authors' => AuthorListResource::collection($this->book->authors),
-            'description' => $this->book->description,
-            'summary' => $this->book->summary,
+            'authors' => $this->book?->authors ?? AuthorListResource::collection($this->book->authors),
+            'description' => $this->book?->description,
+            'summary' => $this->book?->summary,
             'price' => $this->price,
             'format' => $this->format,
-            'narrator' => $this->narrator->name,
-            'publisher' => $this->publisher->name,
+            'narrator' => $this->narrator?->name,
+            'publisher' => $this->publisher?->name,
             'content_type' => $this->content->title,
             //TODO: FIX THIS TO GET IMAGE FROM UPLOAD SERVICE
             'image' => null

@@ -2,10 +2,19 @@
 
 namespace App\Modules\Catalog\Infrastructure\Models;
 
+use App\Modules\Catalog\Infrastructure\Database\Factories\BookFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory()
+    {
+        return BookFactory::new();
+    }
+
     protected $guarded = ['id'];
 
     public function categories()

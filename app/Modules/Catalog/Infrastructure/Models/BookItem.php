@@ -22,4 +22,9 @@ class BookItem extends Model
     {
         return $this->belongsTo(Narrator::class);
     }
+
+    public function content()
+    {
+        return $this->belongsTo(Content::class);
+    }
 }

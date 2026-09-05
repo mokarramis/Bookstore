@@ -10,7 +10,7 @@ use App\Modules\Catalog\Presentation\Resource\Book\BookListResource;
 
 class BookController extends Controller
 {
-    public function list(Content $content, Category $category)
+    public function list(int $content_id, int $category_id)
     {
         $bookItems = BookItem::with([
                 'book',
@@ -19,9 +19,9 @@ class BookController extends Controller
                 'book.authors',
                 'content'
             ])
-            ->where('content_id', $content->id)
-            ->whereHas('book.categories', function ($query) use ($category) {
-                $query->where('categories.id', $category->id);
+            ->where('content_id', $content_id)
+            ->whereHas('book.categories', function ($query) use ($category_id) {
+                $query->where('categories.id', $category_id);
             })
             ->get();
 
