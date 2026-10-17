@@ -14,3 +14,16 @@ if (!function_exists('error')) {
     return response(['success' => true, 'message' => $message, 'data' => $data], $code);
   }
 }
+
+if (!function_exists('pagination')) {
+  function pagination($data)
+  {
+      return [
+          'currentPage' => $data->currentPage(),
+          'lastPage' => $data->lastPage(),
+          'previousPageUrl' => $data->previousPageUrl(),
+          'nextPageUrl' => $data->nextPageUrl(),
+          'total' => $data->total()
+      ];
+  }
+}

@@ -16,3 +16,5 @@ Route::prefix('catalog')->group(function(){
       Route::get('/{content}', [BookController::class, 'showCategories']);
     });
 });
+
+

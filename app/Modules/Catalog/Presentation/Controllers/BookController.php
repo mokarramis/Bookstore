@@ -5,7 +5,6 @@ namespace App\Modules\Catalog\Presentation\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Catalog\Infrastructure\Models\BookItem;
 use App\Modules\Catalog\Infrastructure\Models\Category;
-use App\Modules\Catalog\Infrastructure\Models\Content;
 use App\Modules\Catalog\Presentation\Resource\Book\BookListResource;
 
 class BookController extends Controller
@@ -23,16 +22,22 @@ class BookController extends Controller
             ->whereHas('book.categories', function ($query) use ($category_id) {
                 $query->where('categories.id', $category_id);
             })
-            ->get();
+            ->paginate(20);
 
-        return success('books list', BookListResource::collection($bookItems));
+        return success('books list', 
+            [
+                'items' => BookListResource::collection($bookItems),
+                'pagination' => pagination($bookItems)
+            ],    
+        );
     }
 
-    public function showCategories(Content $content)
+    public function showCategories(int $content)
     {
+        // content->categories;
         $categories = Category::whereHas('contents', function($q) use ($content){
-            $q->where('contents.id', $content->id);
-        });
+            $q->where('contents.id', $content);
+        })->get();
 
         return success('categories list', $categories);
     }
