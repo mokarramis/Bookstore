@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Backoffice\Presentation\Requests\CategoryRequest;
 use App\Modules\Backoffice\Presentation\Resource\CategoryResource;
 use App\Modules\Catalog\Application\Contracts\CategoryInterface;
+use App\Modules\Catalog\Infrastructure\Models\Category;
 use OpenApi\Attributes as OA;
 
 
@@ -73,6 +74,7 @@ class CategoryController extends Controller
     )]
     public function create(CategoryRequest $request)
     {
+        $this->authorize('create', Category::class);
         $category = $this->categoryInterface->create($request->all());
 
         return success('created', $category);
@@ -101,6 +103,7 @@ class CategoryController extends Controller
     )]
     public function list()
     {
+        $this->authorize('viewAny', Category::class);
         $category = $this->categoryInterface->list();
 
         return success('categories list', CategoryResource::collection($category));

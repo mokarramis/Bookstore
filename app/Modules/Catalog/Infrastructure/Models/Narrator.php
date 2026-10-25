@@ -2,7 +2,9 @@
 
 namespace App\Modules\Catalog\Infrastructure\Models;
 
-class Narrator
+use Illuminate\Database\Eloquent\Model;
+
+class Narrator extends Model
 {
-  
+    protected $guarded = ['id'];
 }

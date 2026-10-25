@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Modules\Catalog\Infrastructure\Database\Seeders\BookSeeder;
 use App\Modules\Catalog\Infrastructure\Database\Seeders\CategorySeeder;
 use App\Modules\Catalog\Infrastructure\Database\Seeders\ContentSeeder;
+use App\Modules\Catalog\Infrastructure\Database\Seeders\PublisherSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,9 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(
+        $this->call([
             ContentSeeder::class,
             CategorySeeder::class,
-        );
+            PublisherSeeder::class,
+            BookSeeder::class
+        ]);
     }
 }

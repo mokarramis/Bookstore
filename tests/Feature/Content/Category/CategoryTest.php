@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Content\Category;
 
+use App\Modules\Catalog\Application\DTO\BookDTO;
+use App\Modules\Catalog\Infrastructure\Models\Book;
 use App\Modules\Catalog\Infrastructure\Models\Category;
 use App\Modules\Catalog\Infrastructure\Models\Content;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -57,5 +59,13 @@ class CategoryTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    public function test_an_object_is_from_book()
+    {
+        $bookModel = Book::factory()->create();
+        $bookDto = BookDTO::fromModel($bookModel);
+
+        $this->assertInstanceOf(BookDTO::class, $bookDto);
     }
 }
