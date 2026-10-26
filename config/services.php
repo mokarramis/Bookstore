@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'zarinpal' => [
+        'merchant_id' => env('ZARIN_MERCHANT_ID'),
+        'start_url' => env('ZARIN_START_URL', "https://payment.zarinpal.com/pg/StartPay/"),
+        'verify_url' => env('ZARIN_START_URL', "https://payment.zarinpal.com/pg/v4/payment/verify.json"),
+    ]
+
 ];

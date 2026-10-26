@@ -5,6 +5,7 @@ return [
     App\Modules\Backoffice\BackofficeServiceProvider::class,
     App\Modules\Catalog\CatalogServiceProvider::class,
     App\Modules\Order\OrderServiceProvider::class,
+    App\Modules\Payment\PaymentServiceProvider::class,
     App\Providers\AppServiceProvider::class,
     App\Providers\HorizonServiceProvider::class,
 ];
