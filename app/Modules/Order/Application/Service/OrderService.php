@@ -50,19 +50,30 @@ class OrderService
     {
         $subtotal = 0;
         $bookItems = $data['book_items'];
-        foreach ($bookItems as $bookItem) {
-            $bookItem = BookItem::where('id', $bookItem)->first();
+        $pivotData = [];
+
+        foreach ($bookItems as $item) {
+            $bookId = $item['id'];
+            $bookCount = $item['count'];
+            $bookItem = BookItem::where('id', $bookId)->first();
             if (!$bookItem) {
                 continue;
             }
-            $subtotal += $bookItem->price;
+            $subtotal += $bookItem->price * $item['count'];
+            $pivotData[$bookId] = [
+                'count' => $bookCount,
+            ];
         }
 
-        $order = Order::create([
-            'subtotal' => $subtotal,
-        ]);
+        $order = DB::transaction(function() use($subtotal, $pivotData){
+            $order = Order::create([
+                'subtotal' => $subtotal,
+            ]);
 
-        $order->items()->attach($bookItems);
+            $order->items()->syncWithoutDetaching($pivotData);
+
+            return $order;
+        });
 
         return $order;
     }

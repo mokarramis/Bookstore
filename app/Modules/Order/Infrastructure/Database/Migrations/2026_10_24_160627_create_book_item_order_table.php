@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('book_item_id');
             $table->integer('count');
-            $table->integer('total_discount'); // the total discount of that item, eg: if I have ordered 2 items so the total doscount of these two data
+            $table->integer('total_discount')->nullable(); // the total discount of that item, eg: if I have ordered 2 items so the total doscount of these two data
             $table->foreignId('order_id');
             $table->timestamps();
         });

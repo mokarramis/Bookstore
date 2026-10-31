@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('total_amount')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->integer('subtotal');
             $table->integer('total_discount')->nullable();
             $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'))->default(OrderStatusEnum::UNPAID->value);
