@@ -2,7 +2,9 @@
 
 namespace App\Modules\Catalog\Infrastructure\Models;
 
+use App\Modules\Order\Infrastructure\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 class BookItem extends Model
 {
@@ -26,5 +28,10 @@ class BookItem extends Model
     public function content()
     {
         return $this->belongsTo(Content::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'book_item_order')->withPivot('count');
     }
 }
